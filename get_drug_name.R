@@ -2,7 +2,7 @@ get_drug_name <- function(mat,num_drug,n){
 
   get_index <- which(mat[,13]==num_drug, arr.ind = TRUE)
   drug_df <- data.frame(matrix(ncol = 2, nrow = 0))
-  colnames(drug_df)<- c("Drugs Combination", "Size Difference")
+  colnames(drug_df)<- c("Drugs_Combination", "Norm_Mean_Size_Difference")
   for (iter in 1:n){
    
     if(num_drug>1){

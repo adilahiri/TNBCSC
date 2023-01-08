@@ -7,6 +7,9 @@ source('~/Desktop/Breast_Cancer/code/get_drug_name.R')
 library(openxlsx)
 library(dplyr)
 library(xlsx)
+library(ggplot2)
+#require(gridExtra)
+library(patchwork)
 
 print("Starting anlysis")
 
@@ -145,9 +148,7 @@ print(new)
 one_mutation_df <- one_mutation_df %>% arrange(size_difference)
 two_mutation_df <- two_mutation_df %>% arrange(size_difference)
 three_mutation_df <- three_mutation_df %>% arrange(size_difference)
-write.xlsx(one_mutation_df,"One_Mutation_Files.xlsx", sheetName = "All_Drug_Combos")
-write.xlsx(two_mutation_df,"Two_Mutation_Files.xlsx", sheetName = "All_Drug_Combos")
-write.xlsx(three_mutation_df,"Three_Mutation_Files.xlsx", sheetName = "All_Drug_Combos")
+
 
 
 # Generate top 10 scores for single mutation network with different combination of drugs
@@ -161,7 +162,7 @@ top10_five_drug_one_mutation <- get_drug_name(one_mutation_df,num_drug = 5,n=10)
 one_mutation_names <- list('All_Drug_Combos' = one_mutation_df, 'One_Drug' = top10_one_drug_one_mutation, 
                            'Two_Drug' = top10_two_drug_one_mutation,'Three_Drug' = top10_three_drug_one_mutation,
                            'Four_Drug' = top10_four_drug_one_mutation,'Five_Drug' = top10_five_drug_one_mutation)
-write.xlsx(one_mutation_names, file = 'One_Mutation_Files.xlsx')
+write.xlsx(one_mutation_names, file = 'One_Mutation_File.xlsx')
 
 
 # Generate top 10 scores for double mutation network with different combination of drugs
@@ -175,7 +176,7 @@ top10_five_drug_two_mutation <- get_drug_name(two_mutation_df,num_drug = 5,n=10)
 two_mutation_names <- list('All_Drug_Combos' = two_mutation_df, 'One_Drug' = top10_one_drug_two_mutation, 
                            'Two_Drug' = top10_two_drug_two_mutation,'Three_Drug' = top10_three_drug_two_mutation,
                            'Four_Drug' = top10_four_drug_two_mutation,'Five_Drug' = top10_five_drug_two_mutation)
-write.xlsx(two_mutation_names, file = 'Two_Mutation_Files.xlsx')
+write.xlsx(two_mutation_names, file = 'Two_Mutation_File.xlsx')
 
 # Generate top 10 scores for triple mutation network with different combination of drugs
 top10_one_drug_three_mutation <- get_drug_name(three_mutation_df,num_drug = 1,n=10)
@@ -188,8 +189,100 @@ top10_five_drug_three_mutation <- get_drug_name(three_mutation_df,num_drug = 5,n
 three_mutation_names <- list('All_Drug_Combos' = three_mutation_df, 'One_Drug' = top10_one_drug_three_mutation, 
                            'Two_Drug' = top10_two_drug_three_mutation,'Three_Drug' = top10_three_drug_three_mutation,
                            'Four_Drug' = top10_four_drug_three_mutation,'Five_Drug' = top10_five_drug_three_mutation)
-write.xlsx(three_mutation_names, file = 'Three_Mutation_Files.xlsx')
+write.xlsx(three_mutation_names, file = 'Three_Mutation_File.xlsx')
 
+## Make plots 
+top10_one_drug_one_mutation<- rbind(top10_one_drug_one_mutation,c("Untreated",1))
+top10_two_drug_one_mutation<- rbind(top10_two_drug_one_mutation,c("Untreated",1))
+top10_three_drug_one_mutation<- rbind(top10_three_drug_one_mutation,c("Untreated",1))
+top10_four_drug_one_mutation<- rbind(top10_four_drug_one_mutation,c("Untreated",1))
+top10_five_drug_one_mutation<- rbind(top10_five_drug_one_mutation,c("Untreated",1))
+
+top10_one_drug_two_mutation <- rbind(top10_one_drug_two_mutation,c("Untreated",1))
+top10_two_drug_two_mutation <- rbind(top10_two_drug_two_mutation,c("Untreated",1))
+top10_three_drug_two_mutation <-rbind(top10_three_drug_two_mutation,c("Untreated",1))
+top10_four_drug_two_mutation <- rbind(top10_four_drug_two_mutation,c("Untreated",1))
+top10_five_drug_two_mutation <- rbind(top10_five_drug_two_mutation,c("Untreated",1))
+
+top10_one_drug_three_mutation <- rbind(top10_one_drug_three_mutation,c("Untreated",1))
+top10_two_drug_three_mutation <- rbind(top10_two_drug_three_mutation,c("Untreated",1))
+top10_three_drug_three_mutation <- rbind(top10_three_drug_three_mutation,c("Untreated",1))
+top10_four_drug_three_mutation <- rbind(top10_four_drug_three_mutation,c("Untreated",1))
+top10_five_drug_three_mutation <- rbind(top10_five_drug_three_mutation,c("Untreated",1))
+
+
+
+# Plot of single mutations 
+one_mut_one_drug_pt<-ggplot(top10_one_drug_one_mutation, aes(x=Drugs_Combination, y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
+  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) 
+
+one_mut_two_drug_pt<-ggplot(top10_two_drug_one_mutation, aes(x=Drugs_Combination, y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
+  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) 
+
+one_mut_three_drug_pt<-ggplot(top10_three_drug_one_mutation, aes(x=Drugs_Combination, y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
+  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) 
+
+one_mut_four_drug_pt<-ggplot(top10_four_drug_one_mutation, aes(x=Drugs_Combination, y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
+  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) 
+
+one_mut_five_drug_pt<-ggplot(top10_five_drug_one_mutation, aes(x=Drugs_Combination, y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
+  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) 
+
+
+P1<- one_mut_one_drug_pt + one_mut_two_drug_pt + one_mut_three_drug_pt +
+  one_mut_four_drug_pt + one_mut_five_drug_pt + plot_annotation(tag_levels = "I") 
+
+#grid.arrange(one_mut_one_drug_pt, one_mut_two_drug_pt, one_mut_three_drug_pt,
+#             one_mut_four_drug_pt,one_mut_five_drug_pt, ncol=3,nrow=2)
+
+
+# Plot of double mutations 
+
+two_mut_one_drug_pt<-ggplot(top10_one_drug_two_mutation, aes(x=Drugs_Combination, y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
+  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) 
+
+two_mut_two_drug_pt<-ggplot(top10_two_drug_two_mutation, aes(x=Drugs_Combination, y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
+  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) 
+
+two_mut_three_drug_pt<-ggplot(top10_three_drug_two_mutation, aes(x=Drugs_Combination, y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
+  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) 
+
+two_mut_four_drug_pt<-ggplot(top10_four_drug_two_mutation, aes(x=Drugs_Combination, y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
+  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) 
+
+two_mut_five_drug_pt<-ggplot(top10_five_drug_two_mutation, aes(x=Drugs_Combination, y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
+  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) 
+
+
+P2<- two_mut_one_drug_pt + two_mut_two_drug_pt + two_mut_three_drug_pt + 
+  two_mut_four_drug_pt + two_mut_five_drug_pt + plot_annotation(tag_levels = "I")
+
+
+# Plot of triple mutations 
+
+three_mut_one_drug_pt<-ggplot(top10_one_drug_three_mutation, aes(x=Drugs_Combination, y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
+  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) 
+
+three_mut_two_drug_pt<-ggplot(top10_two_drug_three_mutation, aes(x=Drugs_Combination, y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
+  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) 
+
+three_mut_three_drug_pt<-ggplot(top10_three_drug_three_mutation, aes(x=Drugs_Combination, y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
+  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) 
+
+three_mut_four_drug_pt<-ggplot(top10_four_drug_three_mutation, aes(x=Drugs_Combination, y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
+  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) 
+
+three_mut_five_drug_pt<-ggplot(top10_five_drug_three_mutation, aes(x=Drugs_Combination, y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
+  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) 
+
+
+P3<-three_mut_one_drug_pt + three_mut_two_drug_pt + three_mut_three_drug_pt + 
+  three_mut_four_drug_pt +three_mut_five_drug_pt + plot_annotation(tag_levels = "I")
+
+
+ggsave("Single_Mutation_Drug_SD.png",plot=P1,dpi=300)
+ggsave("Double_Mutation_Drug_SD.png",plot=P1,dpi=300)
+ggsave("Triple_Mutation_Drug_SD.png",plot=P1,dpi=300)
 
 print("Analysis complete, tables generated in same directory")
 
