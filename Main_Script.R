@@ -219,20 +219,20 @@ top10_five_drug_three_mutation <- rbind(top10_five_drug_three_mutation,c("Untrea
 
 
 # Plot of single mutations 
-one_mut_one_drug_pt<-ggplot(top10_one_drug_one_mutation, aes(x=Drugs_Combination, y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
-  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) 
+one_mut_one_drug_pt<-ggplot(top10_one_drug_one_mutation, aes(x=reorder(Drugs_Combination,-as.numeric(Norm_Mean_Size_Difference)), y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
+  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) + xlab("Drug Combinations")
+ 
+one_mut_two_drug_pt<-ggplot(top10_two_drug_one_mutation, aes(x=reorder(Drugs_Combination,-as.numeric(Norm_Mean_Size_Difference)), y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
+  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) + xlab("Drug Combinations")
 
-one_mut_two_drug_pt<-ggplot(top10_two_drug_one_mutation, aes(x=Drugs_Combination, y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
-  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) 
+one_mut_three_drug_pt<-ggplot(top10_three_drug_one_mutation, aes(x=reorder(Drugs_Combination,-as.numeric(Norm_Mean_Size_Difference)), y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
+  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) + xlab("Drug Combinations")
 
-one_mut_three_drug_pt<-ggplot(top10_three_drug_one_mutation, aes(x=Drugs_Combination, y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
-  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) 
+one_mut_four_drug_pt<-ggplot(top10_four_drug_one_mutation, aes(x=reorder(Drugs_Combination,-as.numeric(Norm_Mean_Size_Difference)), y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
+  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) + xlab("Drug Combinations")
 
-one_mut_four_drug_pt<-ggplot(top10_four_drug_one_mutation, aes(x=Drugs_Combination, y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
-  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) 
-
-one_mut_five_drug_pt<-ggplot(top10_five_drug_one_mutation, aes(x=Drugs_Combination, y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
-  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) 
+one_mut_five_drug_pt<-ggplot(top10_five_drug_one_mutation, aes(x=reorder(Drugs_Combination,-as.numeric(Norm_Mean_Size_Difference)), y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
+  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) + xlab("Drug Combinations")
 
 
 P1<- one_mut_one_drug_pt + one_mut_two_drug_pt + one_mut_three_drug_pt +
@@ -244,20 +244,20 @@ P1<- one_mut_one_drug_pt + one_mut_two_drug_pt + one_mut_three_drug_pt +
 
 # Plot of double mutations 
 
-two_mut_one_drug_pt<-ggplot(top10_one_drug_two_mutation, aes(x=Drugs_Combination, y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
-  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) 
+two_mut_one_drug_pt<-ggplot(top10_one_drug_two_mutation, aes(x=reorder(Drugs_Combination,-as.numeric(Norm_Mean_Size_Difference)), y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
+  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) + xlab("Drug Combinations")
 
-two_mut_two_drug_pt<-ggplot(top10_two_drug_two_mutation, aes(x=Drugs_Combination, y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
-  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) 
+two_mut_two_drug_pt<-ggplot(top10_two_drug_two_mutation, aes(x=reorder(Drugs_Combination,-as.numeric(Norm_Mean_Size_Difference)), y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
+  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) +xlab("Drug Combinations")
 
-two_mut_three_drug_pt<-ggplot(top10_three_drug_two_mutation, aes(x=Drugs_Combination, y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
-  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) 
+two_mut_three_drug_pt<-ggplot(top10_three_drug_two_mutation, aes(x=reorder(Drugs_Combination,-as.numeric(Norm_Mean_Size_Difference)), y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
+  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) + xlab("Drug Combinations")
 
-two_mut_four_drug_pt<-ggplot(top10_four_drug_two_mutation, aes(x=Drugs_Combination, y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
-  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) 
+two_mut_four_drug_pt<-ggplot(top10_four_drug_two_mutation, aes(x=reorder(Drugs_Combination,-as.numeric(Norm_Mean_Size_Difference)), y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
+  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) + xlab("Drug Combinations")
 
-two_mut_five_drug_pt<-ggplot(top10_five_drug_two_mutation, aes(x=Drugs_Combination, y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
-  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) 
+two_mut_five_drug_pt<-ggplot(top10_five_drug_two_mutation, aes(x=reorder(Drugs_Combination,-as.numeric(Norm_Mean_Size_Difference)), y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
+  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) + xlab("Drug Combinations")
 
 
 P2<- two_mut_one_drug_pt + two_mut_two_drug_pt + two_mut_three_drug_pt + 
@@ -266,20 +266,20 @@ P2<- two_mut_one_drug_pt + two_mut_two_drug_pt + two_mut_three_drug_pt +
 
 # Plot of triple mutations 
 
-three_mut_one_drug_pt<-ggplot(top10_one_drug_three_mutation, aes(x=Drugs_Combination, y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
-  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) 
+three_mut_one_drug_pt<-ggplot(top10_one_drug_three_mutation, aes(x=reorder(Drugs_Combination,-as.numeric(Norm_Mean_Size_Difference)), y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
+  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) + xlab("Drug Combinations")
 
-three_mut_two_drug_pt<-ggplot(top10_two_drug_three_mutation, aes(x=Drugs_Combination, y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
-  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) 
+three_mut_two_drug_pt<-ggplot(top10_two_drug_three_mutation, aes(x=reorder(Drugs_Combination,-as.numeric(Norm_Mean_Size_Difference)), y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
+  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) + xlab("Drug Combinations")
 
-three_mut_three_drug_pt<-ggplot(top10_three_drug_three_mutation, aes(x=Drugs_Combination, y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
-  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) 
+three_mut_three_drug_pt<-ggplot(top10_three_drug_three_mutation, aes(x=reorder(Drugs_Combination,-as.numeric(Norm_Mean_Size_Difference)), y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
+  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) + xlab("Drug Combinations")
 
-three_mut_four_drug_pt<-ggplot(top10_four_drug_three_mutation, aes(x=Drugs_Combination, y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
-  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) 
+three_mut_four_drug_pt<-ggplot(top10_four_drug_three_mutation, aes(x=reorder(Drugs_Combination,-as.numeric(Norm_Mean_Size_Difference)), y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
+  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) + xlab("Drug Combinations")
 
-three_mut_five_drug_pt<-ggplot(top10_five_drug_three_mutation, aes(x=Drugs_Combination, y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
-  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) 
+three_mut_five_drug_pt<-ggplot(top10_five_drug_three_mutation, aes(x=reorder(Drugs_Combination,-as.numeric(Norm_Mean_Size_Difference)), y=Norm_Mean_Size_Difference)) +geom_bar(stat="identity")+
+  theme(text = element_text(size=5),axis.text.x = element_text(angle=45, hjust=1)) + xlab("Drug Combinations")
 
 
 P3<-three_mut_one_drug_pt + three_mut_two_drug_pt + three_mut_three_drug_pt + 
@@ -287,8 +287,8 @@ P3<-three_mut_one_drug_pt + three_mut_two_drug_pt + three_mut_three_drug_pt +
 
 
 ggsave("Plots/Single_Mutation_Drug_SD.png",plot=P1,dpi=300)
-ggsave("Plots/Double_Mutation_Drug_SD.png",plot=P1,dpi=300)
-ggsave("Plots/Triple_Mutation_Drug_SD.png",plot=P1,dpi=300)
+ggsave("Plots/Double_Mutation_Drug_SD.png",plot=P2,dpi=300)
+ggsave("Plots/Triple_Mutation_Drug_SD.png",plot=P3,dpi=300)
 
 print("Analysis complete, tables generated in same directory")
 
