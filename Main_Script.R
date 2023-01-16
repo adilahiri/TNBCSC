@@ -1,7 +1,13 @@
-source('~/Desktop/Breast_Cancer/code/TNBC_one_fault.R')
-source('~/Desktop/Breast_Cancer/code/TNBC_two_fault.R')
-source('~/Desktop/Breast_Cancer/code/TNBC_three_fault.R')
-source('~/Desktop/Breast_Cancer/code/get_drug_name.R')
+setwd("~/Desktop/Breast_Cancer/TNBCSC")
+mainDir <- "~/Desktop/Breast_Cancer/TNBCSC"
+resultsDir<- "Results"
+plotsDir <- "Plots"
+dir.create(file.path(mainDir, resultsDir), showWarnings = FALSE)
+dir.create(file.path(mainDir, plotsDir), showWarnings = FALSE)
+source('TNBC_one_fault.R')
+source('TNBC_two_fault.R')
+source('TNBC_three_fault.R')
+source('get_drug_name.R')
 
 
 library(openxlsx)
@@ -25,7 +31,7 @@ A= matrix(0,43,2048) # store SD matrix
 Drug= matrix(0,1,11) # map for drug vector
 D_iter=1
 
-drug_name <- c("BCAT_comple_Inhibitor","GLI_Inhibitor","Notch_complex_Inhibitor",
+drug_name <- c("Beta_Catenin_complex_Inhibitor","GLI_Inhibitor","Notch_complex_Inhibitor",
                "AKT_Inhibitor","NFKB_Inhibitor","NIK_Inhibitor","CREB_Inhibitor",
                "STAT3_Inhibitor","PI3K_Inhibitor","SMAD_complex_Inhibitor",
                "Hippo_complex_Inhibitor")
@@ -162,7 +168,7 @@ top10_five_drug_one_mutation <- get_drug_name(one_mutation_df,num_drug = 5,n=10)
 one_mutation_names <- list('All_Drug_Combos' = one_mutation_df, 'One_Drug' = top10_one_drug_one_mutation, 
                            'Two_Drug' = top10_two_drug_one_mutation,'Three_Drug' = top10_three_drug_one_mutation,
                            'Four_Drug' = top10_four_drug_one_mutation,'Five_Drug' = top10_five_drug_one_mutation)
-write.xlsx(one_mutation_names, file = 'One_Mutation_File.xlsx')
+write.xlsx(one_mutation_names, file = 'results/One_Mutation_File.xlsx')
 
 
 # Generate top 10 scores for double mutation network with different combination of drugs
@@ -176,7 +182,7 @@ top10_five_drug_two_mutation <- get_drug_name(two_mutation_df,num_drug = 5,n=10)
 two_mutation_names <- list('All_Drug_Combos' = two_mutation_df, 'One_Drug' = top10_one_drug_two_mutation, 
                            'Two_Drug' = top10_two_drug_two_mutation,'Three_Drug' = top10_three_drug_two_mutation,
                            'Four_Drug' = top10_four_drug_two_mutation,'Five_Drug' = top10_five_drug_two_mutation)
-write.xlsx(two_mutation_names, file = 'Two_Mutation_File.xlsx')
+write.xlsx(two_mutation_names, file = 'results/Two_Mutation_File.xlsx')
 
 # Generate top 10 scores for triple mutation network with different combination of drugs
 top10_one_drug_three_mutation <- get_drug_name(three_mutation_df,num_drug = 1,n=10)
@@ -189,7 +195,7 @@ top10_five_drug_three_mutation <- get_drug_name(three_mutation_df,num_drug = 5,n
 three_mutation_names <- list('All_Drug_Combos' = three_mutation_df, 'One_Drug' = top10_one_drug_three_mutation, 
                            'Two_Drug' = top10_two_drug_three_mutation,'Three_Drug' = top10_three_drug_three_mutation,
                            'Four_Drug' = top10_four_drug_three_mutation,'Five_Drug' = top10_five_drug_three_mutation)
-write.xlsx(three_mutation_names, file = 'Three_Mutation_File.xlsx')
+write.xlsx(three_mutation_names, file = 'results/Three_Mutation_File.xlsx')
 
 ## Make plots 
 top10_one_drug_one_mutation<- rbind(top10_one_drug_one_mutation,c("Untreated",1))
@@ -230,7 +236,7 @@ one_mut_five_drug_pt<-ggplot(top10_five_drug_one_mutation, aes(x=Drugs_Combinati
 
 
 P1<- one_mut_one_drug_pt + one_mut_two_drug_pt + one_mut_three_drug_pt +
-  one_mut_four_drug_pt + one_mut_five_drug_pt + plot_annotation(tag_levels = "I") 
+  one_mut_four_drug_pt + one_mut_five_drug_pt + plot_annotation(tag_levels = "a") 
 
 #grid.arrange(one_mut_one_drug_pt, one_mut_two_drug_pt, one_mut_three_drug_pt,
 #             one_mut_four_drug_pt,one_mut_five_drug_pt, ncol=3,nrow=2)
@@ -255,7 +261,7 @@ two_mut_five_drug_pt<-ggplot(top10_five_drug_two_mutation, aes(x=Drugs_Combinati
 
 
 P2<- two_mut_one_drug_pt + two_mut_two_drug_pt + two_mut_three_drug_pt + 
-  two_mut_four_drug_pt + two_mut_five_drug_pt + plot_annotation(tag_levels = "I")
+  two_mut_four_drug_pt + two_mut_five_drug_pt + plot_annotation(tag_levels = "a")
 
 
 # Plot of triple mutations 
@@ -277,12 +283,12 @@ three_mut_five_drug_pt<-ggplot(top10_five_drug_three_mutation, aes(x=Drugs_Combi
 
 
 P3<-three_mut_one_drug_pt + three_mut_two_drug_pt + three_mut_three_drug_pt + 
-  three_mut_four_drug_pt +three_mut_five_drug_pt + plot_annotation(tag_levels = "I")
+  three_mut_four_drug_pt +three_mut_five_drug_pt + plot_annotation(tag_levels = "a")
 
 
-ggsave("Single_Mutation_Drug_SD.png",plot=P1,dpi=300)
-ggsave("Double_Mutation_Drug_SD.png",plot=P1,dpi=300)
-ggsave("Triple_Mutation_Drug_SD.png",plot=P1,dpi=300)
+ggsave("Plots/Single_Mutation_Drug_SD.png",plot=P1,dpi=300)
+ggsave("Plots/Double_Mutation_Drug_SD.png",plot=P1,dpi=300)
+ggsave("Plots/Triple_Mutation_Drug_SD.png",plot=P1,dpi=300)
 
 print("Analysis complete, tables generated in same directory")
 
