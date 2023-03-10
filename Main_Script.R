@@ -1,5 +1,5 @@
-setwd("~/Desktop/Breast_Cancer/TNBCSC")
-mainDir <- "~/Desktop/Breast_Cancer/TNBCSC"
+mainDir <- getwd()
+setwd(mainDir)
 resultsDir<- "Results"
 plotsDir <- "Plots"
 dir.create(file.path(mainDir, resultsDir), showWarnings = FALSE)
@@ -12,7 +12,7 @@ source('get_drug_name.R')
 
 library(openxlsx)
 library(dplyr)
-library(xlsx)
+#library(xlsx)
 library(ggplot2)
 #require(gridExtra)
 library(patchwork)

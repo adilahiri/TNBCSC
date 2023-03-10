@@ -15,7 +15,7 @@ TNBC_two_fault <- function(fault1, fault2, x1, x2, x3, x4, x5,x6,x7,x8,x9,x10,x1
   NFKB_Inhi=x5;
   NIK_Inhi=x6;
   CREB_Inhi= x7;
-  Crypto =x8;
+  STAT3_Inhi =x8;
   PI3K_Inhi= x9;
   SMAD_Inhi=x10;
   YAP_TAZ_TEAD_Inhi=x11;
@@ -328,20 +328,20 @@ TNBC_two_fault <- function(fault1, fault2, x1, x2, x3, x4, x5,x6,x7,x8,x9,x10,x1
     NFKB=1;    
   }
   else {
-    NFKB= (CSL_MAML_RBJK & (!Notch_complex_Inhi)) |IKBa | MAP3K7 | (STAT3 & (!Crypto));       
+    NFKB= (CSL_MAML_RBJK & (!Notch_complex_Inhi)) |IKBa | MAP3K7 | (STAT3 & (!STAT3_Inhi));       
   }
   
-  CCND1 = TCF_LEF | (GLI & (!GLI_Inhi) ) | (CSL_MAML_RBJK & (!Notch_complex_Inhi)) | (YAP_TAZ_TEAD & (!YAP_TAZ_TEAD_Inhi)) | P27| (STAT3 & (!Crypto));
+  CCND1 = TCF_LEF | (GLI & (!GLI_Inhi) ) | (CSL_MAML_RBJK & (!Notch_complex_Inhi)) | (YAP_TAZ_TEAD & (!YAP_TAZ_TEAD_Inhi)) | P27| (STAT3 & (!STAT3_Inhi));
   
-  C_Myc= TCF_LEF| (GLI & (!GLI_Inhi)) | (CSL_MAML_RBJK & (!Notch_complex_Inhi)) | (YAP_TAZ_TEAD &(!YAP_TAZ_TEAD_Inhi)) |(STAT3 & (!Crypto));
+  C_Myc= TCF_LEF| (GLI & (!GLI_Inhi)) | (CSL_MAML_RBJK & (!Notch_complex_Inhi)) | (YAP_TAZ_TEAD &(!YAP_TAZ_TEAD_Inhi)) |(STAT3 & (!STAT3_Inhi));
   
   SNAIL= TCF_LEF|(GLI & (!GLI_Inhi))| (NFKB & (!NFKB_Inhi)) |SMAD2_3_4;
   
-  BCL2= (GLI & (!GLI_Inhi))|(CREB &(!CREB_Inhi))|(STAT3 & (!Crypto));
+  BCL2= (GLI & (!GLI_Inhi))|(CREB &(!CREB_Inhi))|(STAT3 & (!STAT3_Inhi));
   
   TWIST=TCF_LEF|(GLI & (!GLI_Inhi))| (NFKB & (!NFKB_Inhi));
   
-  MCL1=(CREB &(!CREB_Inhi))|(STAT3 & (!Crypto));
+  MCL1=(CREB &(!CREB_Inhi))|(STAT3 & (!STAT3_Inhi));
   
   gate_output <- as.numeric(c(CCND1, C_Myc, SNAIL,BCL2, TWIST,MCL1));
   ideal_output <- c(0,0,0,0,0,0);
